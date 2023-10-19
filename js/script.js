@@ -1,6 +1,6 @@
 "use strict";
 mineSweeper();
-function mineSweeper() {
+function mineSweeper(){
   const btn = document.querySelector("button");
 
   btn.addEventListener("click", play);
@@ -9,6 +9,7 @@ function mineSweeper() {
   function play() {
     let gameOn = true;
     let score = 0;
+    let square
     /* bombs number */
     const bombsNumber = 16;
     /* position of the bombs */
@@ -48,32 +49,47 @@ function mineSweeper() {
     /* disegno quadrato */
     function drawSquare(squareIndex, numSquare, bombs){
       let squareWidth = Math.sqrt(numSquare);
-      const square = document.createElement("div");
+      square = document.createElement("div");
       square.classList.add("square");
       square.style.width = `calc(100% / ${squareWidth})`;
       square.style.height = square.style.width;
       square.innerHTML = squareIndex + 1;
-      square.addEventListener("click", function(){
-        square.classList.add("active");
-        console.log(squareIndex + 1);
-        if (bombs.includes(parseInt(this.textContent))) {
-          this.classList.add("bomb");
-          this.innerHTML = '<i class="fa-solid fa-bomb fa-beat"></i>';
-          gameOn = false;
-          scoreEl.innerHTML = 'Oh no, hai perso! <br> Il tuo punteggio è : ' + score;
-          classRemoveAdd(scoreEl,'text-white','text-danger');
-        } else{
-          this.classList.add("active");
-          score++;
-          if(score === maxScore){
-            scoreEl.innertext = 'Complimenti hai vinto! Vorrei avere la tua fortuna';
-            gameOn = false;
-          } else{
-            scoreEl.innerText = 'Il tuo punteggio è : ' + score;
-          };
-        };
-      });
+      square.addEventListener("click",squareClick)
       return square;
     };
+    /* gameover function */
+    function gameOver(){
+      const squareWBombs = document.getElementsByClassName('square');
+      for(let i = 0; i < squareWBombs.length; i++){
+        let el = squareWBombs[i];
+        el.removeEventListener('click',squareClick);
+        if(bombs.includes(parseInt(el.textContent))){
+          el.classList.add("bomb");
+          el.classList.add('text-black')
+          el.innerHTML = '<i class="fa-solid fa-bomb fa-beat"></i>';
+        }
+      }
+    }
+    /* Square click fucntion */
+    function squareClick(){
+      square.classList.add("active");
+      this.removeEventListener('click',squareClick)
+      if (bombs.includes(parseInt(this.textContent))){
+      this.classList.add("bomb");
+      this.innerHTML = '<i class="fa-solid fa-bomb fa-beat"></i>';
+      scoreEl.innerHTML = 'Oh no, hai perso! <br> Il tuo punteggio è : ' + score;
+      classRemoveAdd(scoreEl,'text-white','text-danger');
+      gameOver();
+      } else{
+      this.classList.add("active");
+       score++;
+      if(score === maxScore){
+         scoreEl.innertext = 'Complimenti hai vinto! Vorrei avere la tua fortuna';
+         gameOver();
+      } else{
+        scoreEl.innerText = 'Il tuo punteggio è : ' + score;
+      };
+    };
   };
+};
 };
