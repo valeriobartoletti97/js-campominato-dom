@@ -40,15 +40,16 @@ function printResult(alertColor,message){
 }
 
 /**
- * [resetForm]
- * Resetto le classi del form
+ * [classRemoveAdd]
+ * Tolgo e aggiungo una classe ad un oggetto
+ * @param {Object} object
  * @param {String} classRemoved 
  * @param {String} classAdd 
  */
 
-function resetForm(classRemoved,classAdd){
-  resultEl.classList.remove(classRemoved)
-  resultEl.classList.add(classAdd)
+function classRemoveAdd(object,classRemoved,classAdd){
+  object.classList.remove(classRemoved);
+  object.classList.add(classAdd);
 }
 
 /**

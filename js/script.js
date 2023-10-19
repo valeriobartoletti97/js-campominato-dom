@@ -22,8 +22,7 @@ function mineSweeper() {
     const scoreEl = document.getElementById('score');
     scoreEl.classList.remove('d-none');
     /* numero di quadratini da generare */
-    let numSquare =
-      difficulty === "medio" ? 81 : difficulty === "difficile" ? 49 : 100;
+    let numSquare = difficulty === "medio" ? 81 : difficulty === "difficile" ? 49 : 100;
     /* bombs generator */
     while (bombs.length < bombsNumber) {
       let bomb = getRndInteger(1, numSquare);
@@ -32,6 +31,8 @@ function mineSweeper() {
         bombs.push(bomb);
       };
     };
+    /* Max score */
+    const maxScore = numSquare - bombsNumber;
     console.log(bombs);
     /* mi prendo la griglia di gioco */
     const playground = document.getElementById("playground");
@@ -45,26 +46,32 @@ function mineSweeper() {
       playground.append(square);
     }
     /* disegno quadrato */
-    function drawSquare(squareIndex, numSquare, bombs) {
+    function drawSquare(squareIndex, numSquare, bombs){
       let squareWidth = Math.sqrt(numSquare);
       const square = document.createElement("div");
       square.classList.add("square");
       square.style.width = `calc(100% / ${squareWidth})`;
       square.style.height = square.style.width;
       square.innerHTML = squareIndex + 1;
-      square.addEventListener("click", function () {
+      square.addEventListener("click", function(){
         square.classList.add("active");
         console.log(squareIndex + 1);
         if (bombs.includes(parseInt(this.textContent))) {
           this.classList.add("bomb");
           this.innerHTML = '<i class="fa-solid fa-bomb fa-beat"></i>';
           gameOn = false;
-          return gameOn;
-        } else {
+          scoreEl.innerHTML = 'Oh no, hai perso! <br> Il tuo punteggio è : ' + score;
+          classRemoveAdd(scoreEl,'text-white','text-danger');
+        } else{
           this.classList.add("active");
           score++;
-          scoreEl.innerText = 'Il tuo punteggio è : ' + score;
-        }
+          if(score === maxScore){
+            scoreEl.innertext = 'Complimenti hai vinto! Vorrei avere la tua fortuna';
+            gameOn = false;
+          } else{
+            scoreEl.innerText = 'Il tuo punteggio è : ' + score;
+          };
+        };
       });
       return square;
     };
