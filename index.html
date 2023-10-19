@@ -9,20 +9,31 @@
     <title>Campo-Minato</title>   
 </head>
 <body>
+    <header>
+        <h1 class="text-center text-uppercase pt-3">Campo fiorito</h1>
+    </header>
     <main class="d-flex justify-content-center align-items-center">
-            <div id="score" class="ms-2 p-2 d-none text-uppercase text-center">
+            <div id="score" class="ms-2 p-2 d-none text-uppercase text-center position-absolute">
                 Il tuo punteggio &egrave; : 0
             </div> 
-            <div id="playground" class="d-none">
-            
-            </div>
-            <div id="game-start" class="d-flex gap-2">
-                <select class="form-select" aria-label="Default select example">
+            <div id ="game-reset" class="d-flex ms-2 p-2 d-none text-uppercase text-center position-absolute">
+                <select class="form-select me-2" aria-label="Default select example">
                     <option selected value="facile">Difficolt&agrave; 1</option>
                     <option value="medio">Difficolt&agrave; 2</option>
                     <option value="difficile">Difficolt&agrave; 3</option>
                   </select>
-                <button class="btn text-uppercase">Gioca</button>
+                <button id="reset-btn" class="btn text-uppercase">Reset</button>
+            </div>
+            <div id="playground" class="d-none">
+            
+            </div>
+            <div id="game-start" class="d-flex">
+                <select class="form-select me-2" aria-label="Default select example">
+                    <option selected value="facile">Difficolt&agrave; 1</option>
+                    <option value="medio">Difficolt&agrave; 2</option>
+                    <option value="difficile">Difficolt&agrave; 3</option>
+                  </select>
+                <button id="start-btn" class="btn text-uppercase">Gioca</button>
             </div>    
     </main>
     <script src="js/utility.js"></script>

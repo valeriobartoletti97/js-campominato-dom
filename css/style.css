@@ -9,6 +9,9 @@
 select{
     width: 100px;
 }
+h1{
+    color: var(--ut-orange);
+}
 body{
     background-color: var(--prussian-blue);
 }
@@ -21,6 +24,7 @@ main{
 #score{
     color: var(--ut-orange);
     border: 1px solid var(--selective-yellow);
+    left: 2px;
 }
 .btn{
     background-color: var(--blue-green);
@@ -33,10 +37,14 @@ main{
     display: flex;
     flex-wrap: wrap;
     border: 2px solid black;
+    z-index:1000;
 }
-button{
+#game-start{
+    width: 220px;
     margin: 0 auto;
-    display: block;
+}
+#game-reset{
+    left:200px;
 }
 .square{
     border: 2px solid black;

@@ -1,12 +1,15 @@
 "use strict";
 mineSweeper();
 function mineSweeper(){
-  const btn = document.querySelector("button");
+  const startBtn = document.getElementById("start-btn");
+  const resetBtn = document.getElementById('reset-btn');
 
-  btn.addEventListener("click", play);
+  resetBtn.addEventListener('click',play);
+  startBtn.addEventListener("click", play);
 
   /* funzione play */
   function play() {
+
     let gameOn = true;
     let score = 0;
     let square
@@ -19,9 +22,15 @@ function mineSweeper(){
     /* faccio sparire la select ed il bottone */
     const gameStart = document.getElementById("game-start");
     gameStart.classList.add("d-none");
+    /* faccio apparire bottone reset */
+    const gameReset = document.getElementById("game-reset");
+    gameReset.classList.remove('d-none');
     /* faccio apparire il punteggio */
     const scoreEl = document.getElementById('score');
     scoreEl.classList.remove('d-none');
+    /* reset punteggio */
+    scoreEl.innerHTML = 'Il tuo punteggio è : ' + score;
+    scoreEl.classList.remove('text-danger','text-success')
     /* numero di quadratini da generare */
     let numSquare = difficulty === "medio" ? 81 : difficulty === "difficile" ? 49 : 100;
     /* bombs generator */
@@ -85,6 +94,7 @@ function mineSweeper(){
        score++;
       if(score === maxScore){
          scoreEl.innertext = 'Complimenti hai vinto! Vorrei avere la tua fortuna';
+         classRemoveAdd(scoreEl,'text-white','text-success');
          gameOver();
       } else{
         scoreEl.innerText = 'Il tuo punteggio è : ' + score;
