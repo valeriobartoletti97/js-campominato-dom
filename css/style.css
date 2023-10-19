@@ -48,3 +48,6 @@ button{
     background-color:var(--sky-blue);
     color: black
 }
+.bomb{
+    background-color: red;
+}
